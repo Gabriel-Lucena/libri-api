@@ -24,7 +24,22 @@ const router = express.Router();
  */
 
 router.post("/usuario/inserir/", (req, res) => {
-  res.status(200).json({ Message: "Rota de inserção de usuário" });
+  console.log(req.body);
+
+  const { nome, sobrenome, email, foto, login, senha } = req.body;
+
+  usuario
+    .create({
+      nome,
+      sobrenome,
+      email,
+      foto,
+      login,
+      senha,
+    })
+    .then(() => {
+      res.status(200).json("Usuário inserido com sucesso!");
+    });
 });
 
 module.exports = router;

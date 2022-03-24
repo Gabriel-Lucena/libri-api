@@ -7,6 +7,7 @@ const express = require("express");
 /*
  * Importa o arquivo de usuário
  */
+
 // const usuario = require("./model/User");
 
 /**
