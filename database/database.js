@@ -15,14 +15,9 @@ const sequelize = require("sequelize");
  * 4 -
  */
 
-const connection = new sequelize(
-  process.env.DB_NAME,
-  process.env.USER,
-  process.env.PASSWORD,
-  {
-    host: "localhost:3306",
-    dialect: "mysql",
-  }
-);
+const connection = new sequelize("libri", "root", "12345678", {
+  host: "localhost",
+  dialect: "mysql",
+});
 
 module.exports = connection;
