@@ -1,5 +1,5 @@
 const express = require("express");
-const usuario = require("../model/User");
+const usuario = require("../database/model/User");
 
 /*
  * Cria a instância de rotas

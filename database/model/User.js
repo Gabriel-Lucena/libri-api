@@ -8,7 +8,7 @@ const sequelize = require("sequelize");
  * Importa o arquivo de conexão com o banco de dados
  */
 
-const connection = require("../database/database");
+const connection = require("../database");
 
 /*
  *  Representa o modelo da tabela de dados de usuário
@@ -35,7 +35,5 @@ const User = connection.define("tblUsuario", {
   login: { type: sequelize.STRING(50), allowNull: false },
   senha: { type: sequelize.STRING(50), allowNull: false },
 });
-
-// User.sync({ force: true });
 
 module.exports = User;
