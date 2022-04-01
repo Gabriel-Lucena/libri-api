@@ -31,7 +31,7 @@ const User = connection.define("tblUsuario", {
   },
   sobrenome: { type: sequelize.STRING(500), allowNull: false },
   email: { type: sequelize.STRING(500), allowNull: false },
-  foto: { type: sequelize.STRING(500), allowNull: false },
+  foto: { type: sequelize.STRING(500), allowNull: true },
   login: { type: sequelize.STRING(50), allowNull: false },
   senha: { type: sequelize.STRING(50), allowNull: false },
 });
