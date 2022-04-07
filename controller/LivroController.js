@@ -16,13 +16,13 @@ const livro = require('../model/Livro');
 
 const router = express.Router();
 
-router.get('/livro/listarLivro', (req, res) => {
+router.get('/livro/', (req, res) => {
   livro.findAll().then((livros) => {
     res.status(200).json(livros);
   });
 });
 
-router.get('/livro/listarLivroId/:id', (req, res) => {
+router.get('/livro/:idLivro', (req, res) => {
   let { id } = req.params;
 
   console.log('ID' + id);
@@ -38,7 +38,7 @@ router.get('/livro/listarLivroId/:id', (req, res) => {
     });
 });
 
-router.post('/livro/cadastrarLivro', (req, res) => {
+router.post('/livro/', (req, res) => {
   const { titulo, descricao, imagem, tblUsuarioCodUsuario } = req.body;
 
   livro
@@ -49,11 +49,11 @@ router.post('/livro/cadastrarLivro', (req, res) => {
       tblUsuarioCodUsuario,
     })
     .then(() => {
-      res.status(200).json({ MSG: 'LIVRO INSERIDO COM SUCESSO!' });
+      res.status(200).json({ MSG: 'Livro inserido com sucesso!' });
     });
 });
 
-router.put('/livro/alterarLivro', (req, res) => {
+router.put('/livro/', (req, res) => {
   const { titulo, descricao, imagem, tblUsuarioCodUsuario, cod_livro } = req.body;
 
   livro
@@ -67,11 +67,11 @@ router.put('/livro/alterarLivro', (req, res) => {
       { where: { cod_livro } },
     )
     .then(() => {
-      res.status(200).json({ MSG: 'LIVRO ALTERADO COM SUCESSO!' });
+      res.status(200).json({ MSG: 'Livro editado com sucesso!' });
     });
 });
 
-router.delete('/livro/excluirLivro/:cod_livro', (req, res) => {
+router.delete('/livro/:idLivro', (req, res) => {
   const { cod_livro } = req.params;
 
   livro
@@ -79,7 +79,7 @@ router.delete('/livro/excluirLivro/:cod_livro', (req, res) => {
       where: { cod_livro },
     })
     .then(() => {
-      res.status(200).json({ MSG: 'LIVRO EXCLUÍDO COM SUCESSO!' });
+      res.status(200).json({ MSG: 'Livro excluído com sucesso!' });
     });
 });
 
