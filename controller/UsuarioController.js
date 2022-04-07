@@ -1,47 +1,52 @@
-/* IMPORTA O MÓDULO DO express */
+/*
+ * Importa o módulo do express
+ */
+
 const express = require('express');
 
-/* IMPORTA O MODEL DE CATEGORIA */
+/*
+ * Importa o model de categoria
+ */
+
 const usuario = require('../model/Usuario');
 
-/* CONFIGURA A FUNCIONALIDA DE ROTAS  */
+/*
+ * Configura a funcionalidade de rotas
+ */
+
 const router = express.Router();
 
-router.get('/usuario/logarUsuario/:login/:senha', (req, res)=>{
+router.get('/usuario/logarUsuario/:login/:senha', (req, res) => {
+  const { login, senha } = req.params;
 
-    const { login, senha } = req.params;
-
-    usuario.findAll({
-        where:{
-            login,
-            senha
-        }
+  usuario
+    .findAll({
+      where: {
+        login,
+        senha,
+      },
     })
-    .then(
-            (usuario)=>{
-                res.status(200).json(usuario);
-            }       
-    );
-
+    .then((usuario) => {
+      res.status(200).json(usuario);
+    });
 });
 
-router.post('/usuario/cadastrarUsuario', (req, res)=>{
+router.post('/usuario/', (req, res) => {
+  const { nome, sobrenome, email, foto, login, senha } = req.body;
 
-    const {nome, sobrenome, email, foto, login, senha} = req.body;
-
-    usuario.create({
-        nome, 
-        sobrenome,
-        email,
-        foto,
-        login,
-        senha
-    }).then(
-        ()=>{
-            res.status(200).json({"MSG": "USUÁRIO INSERIDO COM SUCESSO!"});
-        }
-    );
-
+  usuario
+    .create({
+      nome,
+      sobrenome,
+      email,
+      // foto,
+      foto: "Teste de imagem" || foto,
+      login,
+      senha,
+    })
+    .then(() => {
+      res.status(200).json({ MSG: 'Usuário inserido com sucesso!' });
+    });
 });
 
 module.exports = router;
