@@ -1,41 +1,23 @@
-/**
- * Importa o pacote express para a aplicação
- */
+/* IMPORTAÇÕES DE PACOTES */
+const express = require('express');
 
-const express = require("express");
-
-/*
- * Importa o arquivo de usuário
- */
-
-// const usuario = require("./model/User");
-
-/**
- * Cria uma instância do pacote express
- * para ser utilizada na aplicação
- */
-
+/* INSTANCIAS DE PACOTES */
+//express:
 const app = express();
-const porta = 3000;
 
-/**
- * Importa a controller de usuário
- */
-
-const router = require("./controller/UsuarioController");
-
-/**
- * Configurações do express para manipular formato json
- */
+/* CONFIGURA O EXPRESS PARA LIDAR COM DADOS NO FORMATO JSON */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", router);
+/* IMPORTA E CONFIGURA OS ARQUIVOS DE ROTAS DE USUÁRIOS */
+const usuarioController = require('./controller/UsuarioController');
+app.use('/', usuarioController);
 
-/**
- *  Instância do servidor (express)
- */
+/* IMPORTA E CONFIGURA OS ARQUIVOS DE ROTAS DE LIVROS*/
+const livroController = require('./controller/LivroController');
+app.use('/', livroController);
 
-app.listen(porta, () => {
-  console.log(`Servidor rodando em http://localhost:${porta}`);
+/* INSTANCIA DO SERVIDOR (express) */
+app.listen(3000, ()=>{ 
+    console.log('SERVIDOR RODANDO NA URL: http://localhost:3000'); 
 });
