@@ -22,15 +22,15 @@ router.get('/livro/', (req, res) => {
   });
 });
 
-router.get('/livro/:idLivro', (req, res) => {
-  let { id } = req.params;
+router.get('/livro/id/:idLivro', (req, res) => {
+  let { idLivro } = req.params;
 
-  console.log('ID' + id);
+  console.log('ID' + idLivro);
 
   livro
     .findAll({
       where: {
-        cod_livro: id,
+        idLivro: idLivro,
       },
     })
     .then((livro) => {
@@ -39,14 +39,14 @@ router.get('/livro/:idLivro', (req, res) => {
 });
 
 router.post('/livro/', (req, res) => {
-  const { titulo, descricao, imagem, tblUsuarioCodUsuario } = req.body;
+  const { titulo, descricao, imagem, idUsuario } = req.body;
 
   livro
     .create({
       titulo,
       descricao,
       imagem,
-      tblUsuarioCodUsuario,
+      idUsuario,
     })
     .then(() => {
       res.status(200).json({ MSG: 'Livro inserido com sucesso!' });
@@ -54,7 +54,7 @@ router.post('/livro/', (req, res) => {
 });
 
 router.put('/livro/', (req, res) => {
-  const { titulo, descricao, imagem, tblUsuarioCodUsuario, cod_livro } = req.body;
+  const { titulo, descricao, imagem, idLivro } = req.body;
 
   livro
     .update(
@@ -62,9 +62,8 @@ router.put('/livro/', (req, res) => {
         titulo,
         descricao,
         imagem,
-        tblUsuarioCodUsuario,
       },
-      { where: { cod_livro } },
+      { where: { idLivro } },
     )
     .then(() => {
       res.status(200).json({ MSG: 'Livro editado com sucesso!' });
@@ -72,11 +71,11 @@ router.put('/livro/', (req, res) => {
 });
 
 router.delete('/livro/:idLivro', (req, res) => {
-  const { cod_livro } = req.params;
+  const { idLivro } = req.params;
 
   livro
     .destroy({
-      where: { cod_livro },
+      where: { idLivro },
     })
     .then(() => {
       res.status(200).json({ MSG: 'Livro excluído com sucesso!' });
